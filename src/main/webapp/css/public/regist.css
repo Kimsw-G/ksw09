@@ -1,0 +1,27 @@
+strong{
+    text-align: left;
+    font-size: 8px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#id, #pw, #pwck, #name{
+    width: 100%;
+}
+
+#tel_1,#tel_2,#id, #pw, #pwck, #name{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 2px solid black;
+    height: 25px;
+	background: rgb(237, 237, 237);
+}
+
+#tel_1{
+    width: 28%;
+}
+
+#tel_2{
+    width: 68%;
+}

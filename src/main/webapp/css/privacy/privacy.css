@@ -1,0 +1,38 @@
+#wrapper{
+    /* 전체 페이지 그려주기 */
+    width: 750px;
+    height: 800px;
+    background-color: whitesmoke;
+}
+
+#index{
+    width: 100%;
+    display: flex;
+}
+
+#index div{
+    flex-basis: 250px;
+    text-align: center;
+}
+
+#normal, #daily, #dday{
+	background-color: rgb(237,237,237);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: 0;
+    width: 150px;
+}
+a:link{
+    text-decoration: none;
+    color: black;
+}
+
+#normal{
+	border-bottom: 21px solid yellow;
+}
+#daily{
+	border-bottom: 21px solid cyan;
+}
+#dday{
+    border-bottom: 21px solid chartreuse;
+}

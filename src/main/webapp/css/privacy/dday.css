@@ -1,0 +1,33 @@
+#todoList{
+    height: 779px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#todoList .index{
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.dday, .ctnt, .delete{
+    height: 21px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.dday{
+    flex-basis: 80px;
+}
+
+.ctnt{
+    flex-basis: 510px;
+}
+
+.delete{
+    flex-basis: 120px;
+}

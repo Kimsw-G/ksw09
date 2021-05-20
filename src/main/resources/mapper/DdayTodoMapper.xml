@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ksw09.dao.DdayTodoDAO">
+    <select id="selectDdayTodoList" parameterType="MemberVO" resultType="DdayTodoVO">
+        select content, dday_pk, m_pk, datediff(now(),date(dday)) as nowDday
+        from ddaytodo where m_pk = #{m_pk}
+    </select>
+
+    <insert id="insertDdayTodo" parameterType="DdayTodoVO">
+        insert into ddaytodo (content, m_pk, dday)
+        values (#{content}, #{m_pk}, #{dday})
+    </insert>
+</mapper>
