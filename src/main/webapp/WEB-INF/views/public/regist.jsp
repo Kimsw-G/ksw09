@@ -22,8 +22,8 @@
 	<strong>전화번호</strong><br>
 	<div id="tel">
 	<%-- 첫 박스는 드롭다운으로 구현 --%>
-		<input type="text" name="m_tel" id="tel_1"required>
-		<input type="text" name="m_tel" id="tel_2"required>
+		<input type="text" name="m_tel" id="tel_1" maxlength="3" required>
+		<input type="text" name="m_tel" id="tel_2" maxlength="8" required>
 	</div>
 	<input type="submit" value="회원가입">
 </form>

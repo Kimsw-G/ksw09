@@ -14,7 +14,7 @@
 		<jsp:include page="./todonav/todoNav.jsp"/>
 		<div id="todoList" class="normal">
 		<%-- 스크롤 설정하기! --%>
-		<c:forEach var="todo" items="${todoList}">
+		<c:forEach var="todo" items="${list}">
 		<div class="index">
 			<input type="checkbox" class="check">
 			<p class="ctnt">${todo.ctnt}</p>
@@ -22,6 +22,7 @@
 		</div>
 		</c:forEach>
 		</div>
+		<%--normal todo input--%>
 		<form action="/todo/normal" method="post">
 			<input type="text" name="ctnt">
 			<input type="submit" value="등록">		
