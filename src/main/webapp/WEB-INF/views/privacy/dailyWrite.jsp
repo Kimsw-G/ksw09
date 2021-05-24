@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${loginInfo.m_name}'s TODO</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 	<form action="/todo/dailyWrite" method="post">
 		<%-- 드롭다운으로 dday 일정과 연동시키기 --%>
 		<c:forEach var="i" begin="1" end="7">
-			${date[i-1]}<input type="checkbox" value="${i-1}" name="todoDate">
+			${date[i-1]}<input type="checkbox" value="${i-1}" name="todoDates">
 		</c:forEach>
 		<input type="text" name="ctnt">
 	

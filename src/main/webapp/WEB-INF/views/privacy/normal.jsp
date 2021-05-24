@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>${memberVO.m_name}'s TODO</title>
-<link href="/css/privacy/normal.css" rel="stylesheet" type="text/css" />
+	<meta charset="UTF-8">
+	<title>${loginInfo.m_name}'s TODO</title>
+	<link href="/css/privacy/normal.css" rel="stylesheet" type="text/css" />
+	<script src="/js/normal.js" type="text/javascript" defer></script>
 </head>
 <body>
 
@@ -14,7 +15,7 @@
 		<jsp:include page="./todonav/todoNav.jsp"/>
 		<div id="todoList" class="normal">
 		<%-- 스크롤 설정하기! --%>
-		<c:forEach var="todo" items="${list}">
+		<c:forEach var="todo" items="${todoList}">
 		<div class="index">
 			<input type="checkbox" class="check">
 			<p class="ctnt">${todo.ctnt}</p>
@@ -22,11 +23,11 @@
 		</div>
 		</c:forEach>
 		</div>
-		<%--normal todo input--%>
-		<form action="/todo/normal" method="post">
-			<input type="text" name="ctnt">
-			<input type="submit" value="등록">		
-		</form>
+		<%--normal input--%>
+<%--		<form action="/todo/normal" method="post" onsubmit="return insertNormal()">--%>
+		<input type="text" name="ctnt" id="ctnt">
+		<button onclick="insertNormal();">등록</button>
+<%--		</form>--%>
 	</div>
 	
 <script>

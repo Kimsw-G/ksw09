@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${loginInfo.m_name}'s TODO</title>
 </head>
 <body>
 	<div id="wrapper">

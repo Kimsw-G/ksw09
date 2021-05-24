@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${memberVO.m_name}'s TODO</title>
+<title>${loginInfo.m_name}'s TODO</title>
 <link href="/css/privacy/daily.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

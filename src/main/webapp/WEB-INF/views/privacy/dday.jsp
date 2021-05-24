@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>${memberVO.m_name}'s TODO</title>
-<link href="/css/privacy/dday.css" rel="stylesheet" type="text/css" />
+	<meta charset="UTF-8">
+	<title>${loginInfo.m_name}'s TODO</title>
+	<link href="/css/privacy/dday.css" rel="stylesheet" type="text/css" />
+	<script src="/js/dday.js" type="text/javascropt" defer></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -25,7 +26,8 @@
 			</c:choose>
 			</p>
 			<p class="ctnt">${todo.content }</p>
-			<button class="delete">삭제하기</button>
+<%--			onclick="deleteDdayList(${todo.dday_pk});"--%>
+			<button class="delete" >삭제하기</button>
 		</div>
 		</c:forEach>
 		</div>

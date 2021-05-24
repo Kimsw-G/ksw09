@@ -1,6 +1,7 @@
 package com.example.ksw09.controller;
 
 import com.example.ksw09.dao.MemberDAO;
+import com.example.ksw09.model.LoginInfo;
 import com.example.ksw09.model.MemberVO;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
 
+    @Resource
+    LoginInfo loginInfo;
     @Autowired
     private MemberDAO memberDAO;
 
@@ -28,10 +32,11 @@ public class MemberController {
         MemberVO mv = memberDAO.selectMemberVOById(memberVO.getM_id());
         // pw 검사!
         if(BCrypt.checkpw(memberVO.getM_pw(),mv.getM_pw())){
-            System.out.println("로그인 성공");
-            memberVO = memberDAO.selectMemberVOById(memberVO.getM_id());
-            memberVO.setM_pw(null);
-            session.setAttribute("loginInfo",memberVO);
+            // loginInfo 객체에 로그인 정보들을 담기. Session 처리하기
+            loginInfo.setM_id(mv.getM_id());
+            loginInfo.setM_name(mv.getM_name());
+            loginInfo.setM_pk(mv.getM_pk());
+//            session.setAttribute("loginInfo",loginInfo);
             return "redirect:/todo/normal";
         }else {
             return "redirect:login";

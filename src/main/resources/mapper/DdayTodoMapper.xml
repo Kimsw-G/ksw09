@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.ksw09.dao.DdayTodoDAO">
-    <select id="selectDdayTodoList" parameterType="MemberVO" resultType="DdayTodoVO">
+    <select id="selectDdayTodoList" parameterType="LoginInfo" resultType="DdayTodoVO">
         select content, dday_pk, m_pk, datediff(now(),date(dday)) as nowDday
         from ddaytodo where m_pk = #{m_pk}
     </select>
