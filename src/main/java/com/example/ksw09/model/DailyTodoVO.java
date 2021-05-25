@@ -16,4 +16,6 @@ public class DailyTodoVO {
     private String ctnt;
     private int dday_pk;
 
+    // extra
+    private String date;
 }

@@ -27,7 +27,9 @@
 			</p>
 			<p class="ctnt">${todo.content }</p>
 <%--			onclick="deleteDdayList(${todo.dday_pk});"--%>
-			<button class="delete" >삭제하기</button>
+			<button class="delete" onclick="location.href='/todo/ddayDelete?dday_pk=${todo.dday_pk}'">
+				삭제하기
+			</button>
 		</div>
 		</c:forEach>
 		</div>

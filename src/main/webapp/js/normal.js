@@ -19,6 +19,4 @@ function insertNormal(){
     .then(mj=>{
 
     }); // 보내기
-
-
 }

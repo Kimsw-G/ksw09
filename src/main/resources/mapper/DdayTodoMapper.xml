@@ -12,4 +12,9 @@
         insert into ddaytodo (content, m_pk, dday)
         values (#{content}, #{m_pk}, #{dday})
     </insert>
+
+    <delete id="deleteDdayTodo" parameterType="DdayTodoVO">
+        delete from ddaytodo
+        where dday_pk = #{dday_pk} and m_pk = #{m_pk}
+    </delete>
 </mapper>

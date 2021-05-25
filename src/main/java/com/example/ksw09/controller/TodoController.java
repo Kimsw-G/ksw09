@@ -1,5 +1,6 @@
 package com.example.ksw09.controller;
 
+import com.example.ksw09.MyUtils;
 import com.example.ksw09.dao.DailyTodoDAO;
 import com.example.ksw09.dao.DdayTodoDAO;
 import com.example.ksw09.dao.NormalTodoDAO;
@@ -11,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
 @RequestMapping(value = "/todo/*")
 @Controller
-public class TodoController {
+public class TodoController extends ControllerPath {
 
     @Autowired
     NormalTodoDAO normalTodoDAO;
@@ -25,99 +25,110 @@ public class TodoController {
     DdayTodoDAO ddayTodoDAO;
     @Autowired
     DailyTodoDAO dailyTodoDAO;
+    @Autowired
+    private MyUtils myUtils;
 
     @Resource
     LoginInfo loginInfo;
 
-    // 무조건 얘를 거친다
-    // true 면 게속 이행
-    // false면 멈춤
 
-
-    // normal 페이지 보여주기
-    @RequestMapping(value = "/normal", method = RequestMethod.GET)
-    public String showNormalTodo(Model model){
+    // normal
+    @GetMapping("/normal")
+    public String showNormal(Model model){
         List<NormalTodoVO> list = normalTodoDAO.selectNormalTodoList(loginInfo);
         model.addAttribute("todoList",list);
 
-        return "/privacy/normal";
+        return DIR_PATH+NORMAL;
     }
-
-
-    // 글을 등록하자
     // TODO : 이건 AJAX를 통해서 설정해주기!
     @ResponseBody
-    @RequestMapping(value="/normal",method = RequestMethod.POST)
-    public List<NormalTodoVO> insertNormalTodo(@RequestBody NormalTodoVO param,
+    @PostMapping("/normal")
+    public List<NormalTodoVO> insertNormal(@RequestBody NormalTodoVO param,
                                  Model model){
         param.setM_pk(loginInfo.getM_pk());
         normalTodoDAO.insertNormalTodo(param);
         return normalTodoDAO.selectNormalTodoList(loginInfo);
     }
+    @GetMapping("/normalDelete")
+    public String deleteNormal(NormalTodoVO vo){
+        vo.setM_pk(loginInfo.getM_pk());
+        normalTodoDAO.deleteNormalTodo(vo);
+        return REDIRECT+NORMAL;
+    }
 
-    @RequestMapping(value = "/daily",method = RequestMethod.GET)
-    public String showDailyTodo(Model model){
+    //daily
+    @GetMapping("/daily")
+    public String showDaily(Model model){
         List<DailyTodoVO> list_ = dailyTodoDAO.selectDailyTodoList(loginInfo);
         List<DailyTodoVO> list = new ArrayList<>();
         Iterator<DailyTodoVO> var = list_.iterator();
 
         while (var.hasNext()){
             DailyTodoVO dv = var.next();
-            if(this.checkDate(dv.getTodoDate())){
+            if(myUtils.checkDate(dv.getTodoDate())){
                 list.add(dv);
             }
         }
-
-
+        for (DailyTodoVO vo : list) {
+            myUtils.getDateInfo(vo);
+        }
         model.addAttribute("todoList",list);
-        return "/privacy/daily";
+        return DIR_PATH+DAILY;
     }
-    private boolean checkDate(int dateBin){
-        int date = Calendar.getInstance().get(7)-1;
-        return ((int)Math.pow(2.0D, (double)date) & dateBin) != 0;
-    }
+    @PostMapping("/daily") // 요일 상관없이 전부 보이게 하기
+    public String showAllDaily(Model model){
+        List<DailyTodoVO> list = dailyTodoDAO.selectDailyTodoList(loginInfo);
 
-    @RequestMapping(value = "/dailyWrite", method = RequestMethod.GET)
+        for (DailyTodoVO vo : list) {
+            myUtils.getDateInfo(vo);
+        }
+        model.addAttribute("todoList",list);
+        return DIR_PATH+DAILY;
+    }
+    @GetMapping("/dailyWrite")
     public String showDailyWrite(Model model){
-        String[] date = new String[]{"일", "월", "화", "수", "목", "금", "토"};
-        model.addAttribute("date",date);
-        return "/privacy/dailyWrite";
+        model.addAttribute("date",myUtils.dates);
+        return DIR_PATH+DAILYW;
     }
-
-    @RequestMapping(value = "/dailyWrite",method = RequestMethod.POST)
-    public String insertDailyTodo(DailyTodoVO vo,
+    @PostMapping("/dailyWrite")
+    public String insertDaily(DailyTodoVO vo,
                                   @RequestParam(name = "todoDates") List<Double> todoDates){
         vo.setM_pk(loginInfo.getM_pk());
-        vo.setTodoDate(calcDate(todoDates));
+        vo.setTodoDate(myUtils.calcDate(todoDates));
         dailyTodoDAO.insertDailyTodoList(vo);
-        return "redirect:daily";
+        return REDIRECT+DAILY;
     }
-    private int calcDate(List<Double> todoDates){
-        int cnt = 0;
-        for(int i=0;i<todoDates.size();i++){
-            cnt += (int)(Math.pow(2.0D, todoDates.get(i)));
-        }
-        return cnt;
+    @GetMapping("/dailyDelete")
+    public String deleteDaily(DailyTodoVO vo){
+        vo.setM_pk(loginInfo.getM_pk());
+        dailyTodoDAO.deleteDailyTodo(vo);
+        return REDIRECT+DAILY;
     }
 
+    //dday
     @GetMapping("dday")
-    public String showDdayTodo(Model model){
+    public String showDday(Model model){
         List<DdayTodoVO> list = ddayTodoDAO.selectDdayTodoList(loginInfo);
         model.addAttribute("todoList",list);
 
-        return"/privacy/dday";
+        return DIR_PATH+DDAY;
     }
-
     @GetMapping("ddayWrite")
     public String showDdayWrite(){
 
-        return "/privacy/ddayWrite";
+        return DIR_PATH+DDAYW;
     }
-
     @PostMapping("ddayWrite")
-    public String insertDdayWrite(Model model,DdayTodoVO vo){
+    public String insertDdayWrite(DdayTodoVO vo){
         vo.setM_pk(loginInfo.getM_pk());
         ddayTodoDAO.insertDdayTodo(vo);
-        return "redirect:dday";
+        return REDIRECT+DDAY;
     }
+    @GetMapping("ddayDelete")
+    public String deleteDday(DdayTodoVO vo){
+        vo.setM_pk(loginInfo.getM_pk());
+        ddayTodoDAO.deleteDdayTodo(vo);
+        return REDIRECT+DDAY;
+    }
+
 }

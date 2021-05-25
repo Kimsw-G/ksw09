@@ -10,6 +10,7 @@ import java.util.List;
 @Repository("ddayTodoDAO")
 public interface DdayTodoDAO {
 
-    public List<DdayTodoVO> selectDdayTodoList(LoginInfo param);
-    public int insertDdayTodo(DdayTodoVO param);
+    List<DdayTodoVO> selectDdayTodoList(LoginInfo param);
+    int insertDdayTodo(DdayTodoVO param);
+    int deleteDdayTodo(DdayTodoVO param);
 }

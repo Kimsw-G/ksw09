@@ -19,7 +19,10 @@
 		<div class="index">
 			<input type="checkbox" class="check">
 			<p class="ctnt">${todo.ctnt}</p>
-			<p class="regDate">${todo.regDate}</p>		
+			<p class="regDate">${todo.regDate}</p>
+			<button class="delete" onclick="location.href='/todo/normalDelete?normal_pk=${todo.normal_pk}'">
+				삭제하기
+			</button>
 		</div>
 		</c:forEach>
 		</div>

@@ -10,4 +10,8 @@
         insert into normaltodo (ctnt, m_pk)
         values (#{ctnt}, #{m_pk})
     </insert>
+    <delete id="deleteNormalTodo" parameterType="NormalTodoVO">
+        delete from normaltodo
+        where normal_pk=#{normal_pk} and m_pk=#{m_pk}
+    </delete>
 </mapper>

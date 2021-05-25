@@ -12,13 +12,19 @@
 	<div id="wrapper">
 		<jsp:include page="./todonav/todoNav.jsp"/>
 		<button onclick="location.href='/todo/dailyWrite'">+</button>
+		<form action="/todo/daily" method="post">
+			<button>모두 보기</button>
+		</form>
 		<div id="todoList" class="daily">
 		<c:forEach var="todo" items="${todoList}">
 		<div class="index">
 			<input type="checkbox" class="check">
 			<p class="dday_ct">${todo.dday_pk}</p> <%-- 이걸 통해서 값 가져오기! --%>
 			<p class="ctnt">${todo.ctnt}</p>
-			<p class="regDate">${todo.regDate}</p>
+			<p class="regDate">${todo.date}</p>
+			<button class="delete" onclick="location.href='/todo/dailyDelete?daily_pk=${todo.daily_pk}'">
+				삭제하기
+			</button>
 		</div>
 		</c:forEach>
 		</div>

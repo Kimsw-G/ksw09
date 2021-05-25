@@ -10,4 +10,9 @@
         insert into dailytodo (ctnt,todoDate,m_pk)
         values (#{ctnt},#{todoDate},#{m_pk})
     </insert>
+    <delete id="deleteDailyTodo" parameterType="DailyTodoVO">
+        delete from dailytodo
+        where daily_pk=#{daily_pk} and m_pk=#{m_pk}
+        
+    </delete>
 </mapper>

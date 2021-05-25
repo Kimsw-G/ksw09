@@ -1,7 +1,6 @@
 package com.example.ksw09.config;
 
 import com.example.ksw09.inter.LoginChecker;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
